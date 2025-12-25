@@ -13,16 +13,10 @@ class SplashViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.6,
+              width: MediaQuery.of(context).size.width * 0.8,
               child: Image.asset(AssetsData.kLogo, fit: BoxFit.contain),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 13.0),
-              child: Text(
-                'Reed free books',
-                style: TextStyle(color: kSecondColor),
-              ),
-            ),
+            Text('Reed free books', style: TextStyle(color: kSecondColor)),
           ],
         ),
       ),
