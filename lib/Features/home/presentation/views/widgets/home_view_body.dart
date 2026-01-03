@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexus_book_app/Features/home/presentation/views/widgets/custom_appbar.dart';
 import 'package:nexus_book_app/core/utils/assets/assets.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -6,23 +7,24 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [const Customappbar()]);
+    return const Column(children: [Customappbar(), CustomListViewItem()]);
   }
 }
 
-class Customappbar extends StatelessWidget {
-  const Customappbar({super.key});
+class CustomListViewItem extends StatelessWidget {
+  const CustomListViewItem({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-      child: Row(
-        children: [
-          Image.asset(AssetsData.kLogo, height: 35),
-          const Spacer(),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 30)),
-        ],
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.27,
+      width: MediaQuery.of(context).size.width * 0.4,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        image: const DecorationImage(
+          image: AssetImage(AssetsData.kTestImage),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
