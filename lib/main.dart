@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:nexus_book_app/Features/splash/presentation/views/splash_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nexus_book_app/constants.dart';
+import 'core/utils/app_router.dart';
 
 void main() {
-  runApp(const NexusBookApp());
+  runApp(const Nexus());
 }
 
-class NexusBookApp extends StatelessWidget {
-  const NexusBookApp({super.key});
+class Nexus extends StatelessWidget {
+  const Nexus({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: kPrimaryColor),
-      home: const SplashView(),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: kPrimaryColor,
+        textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
+      ),
     );
   }
 }

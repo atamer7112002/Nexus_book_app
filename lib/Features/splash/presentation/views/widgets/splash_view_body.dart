@@ -1,18 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:nexus_book_app/Features/home/presentation/views/home_view.dart';
-import 'package:nexus_book_app/Features/splash/presentation/views/widgets/slided_text.dart';
-import 'package:nexus_book_app/constants.dart';
-import 'package:nexus_book_app/core/utils/assets/assets.dart';
+import 'package:go_router/go_router.dart';
 
-class SplashViewBody extends StatefulWidget {
-  const SplashViewBody({super.key});
+import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/utils/assets/assets.dart';
+import 'sliding_text.dart';
+
+class SplashViewbody extends StatefulWidget {
+  const SplashViewbody({super.key});
 
   @override
-  State<SplashViewBody> createState() => _SplashViewBodyState();
+  State<SplashViewbody> createState() => _SplashViewbodyState();
 }
 
-class _SplashViewBodyState extends State<SplashViewBody>
+class _SplashViewbodyState extends State<SplashViewbody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
@@ -21,50 +22,52 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     initSlidingAnimation();
+
     navigateToHome();
   }
 
   @override
   void dispose() {
     super.dispose();
+
     animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Image.asset(AssetsData.kLogo, fit: BoxFit.contain),
-            ),
-            const SizedBox(height: 4),
-            SlidedText(slidingAnimation: slidingAnimation),
-          ],
-        ),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Image.asset(AssetsData.kLogo),
+        const SizedBox(height: 4),
+        SlidingText(slidingAnimation: slidingAnimation),
+      ],
     );
   }
 
   void initSlidingAnimation() {
     animationController = AnimationController(
-      duration: const Duration(seconds: 1),
       vsync: this,
+      duration: const Duration(seconds: 1),
     );
+
     slidingAnimation = Tween<Offset>(
-      begin: const Offset(0, 10),
+      begin: const Offset(0, 2),
       end: Offset.zero,
     ).animate(animationController);
 
     animationController.forward();
   }
-}
 
-void navigateToHome() {
-  Future.delayed(kTrantitionDuration, () {
-    Get.to(() => const HomeView(), transition: Transition.fadeIn);
-  });
+  void navigateToHome() {
+    Future.delayed(const Duration(seconds: 2), () {
+      // Get.to(() => const HomeView(),
+      //     // calculations
+      //     transition: Transition.fade,
+      //     duration: kTranstionDuration);
+
+      GoRouter.of(context).push(AppRouter.kHomeView);
+    });
+  }
 }
